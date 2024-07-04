@@ -14,7 +14,7 @@ import code_icon from './code_icon.png'
 import send_icon from './send_icon.png'
 import gemini_icon from './gemini_icon.png'
 import pause  from './pause.png'
-import user from './user.png'
+import user from './user.jpg'
 export const assets = {
     history_icon,
     menu_icon,
