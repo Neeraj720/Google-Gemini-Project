@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Main.css";
 import { assets } from "../../assets/assets";
 import { Context } from "../../context/Context";
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
 function Main() {
   const {
@@ -15,7 +17,12 @@ function Main() {
     input,
   } = useContext(Context);
 
-  const { transcript, listening, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
   // Every time we change the transcript listening and setInput this will re-run
   useEffect(() => {
     setInput(transcript);
@@ -28,11 +35,11 @@ function Main() {
       const cleanup = () => {
         clearTimeout(timeoutId);
       };
-      
+
       return cleanup;
     }
   }, [transcript, setInput, listening]);
-//  when you will click the microphone img this will run
+  //  when you will click the microphone img this will run
   const handleMicClick = () => {
     if (listening) {
       SpeechRecognition.stopListening();
@@ -45,18 +52,16 @@ function Main() {
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
   }
-   // Handle card click to set input
-   const handleCardClick = (text) => {
+  // Handle card click to set input
+  const handleCardClick = (text) => {
     setInput(text);
   };
 
- 
-  
   return (
     <div className="main">
       <div className="nav">
         <p>Gemini</p>
-        <img src={assets.user_icon} alt="" />
+        <img src={assets.user} alt="" />
       </div>
       <div className="main-container">
         {!showResult ? (
@@ -68,19 +73,45 @@ function Main() {
               <p>How can I help you today?</p>
             </div>
             <div className="cards">
-              <div className="card" onClick={() => handleCardClick("Suggest beautiful places to see on an upcoming road trip")}>
+              <div
+                className="card"
+                onClick={() =>
+                  handleCardClick(
+                    "Suggest beautiful places to see on an upcoming road trip"
+                  )
+                }
+              >
                 <p>Suggest beautiful places to see on an upcoming road trip</p>
                 <img src={assets.compass_icon} alt="" />
               </div>
-              <div className="card" onClick={() => handleCardClick("Briefly summarize this concept: urban planning")}>
+              <div
+                className="card"
+                onClick={() =>
+                  handleCardClick(
+                    "Briefly summarize this concept: urban planning"
+                  )
+                }
+              >
                 <p>Briefly summarize this concept: urban planning</p>
                 <img src={assets.bulb_icon} alt="" />
               </div>
-              <div className="card" onClick={() => handleCardClick("Brainstorm team bonding activities for our work retreat")}>
+              <div
+                className="card"
+                onClick={() =>
+                  handleCardClick(
+                    "Brainstorm team bonding activities for our work retreat"
+                  )
+                }
+              >
                 <p>Brainstorm team bonding activities for our work retreat</p>
                 <img src={assets.message_icon} alt="" />
               </div>
-              <div className="card" onClick={() => handleCardClick("Tell me about React and Node.js")}>
+              <div
+                className="card"
+                onClick={() =>
+                  handleCardClick("Tell me about React and Node.js")
+                }
+              >
                 <p>Tell me about React and Node.js</p>
                 <img src={assets.code_icon} alt="" />
               </div>
@@ -122,13 +153,14 @@ function Main() {
             <div>
               <img src={assets.gallery_icon} alt="" />
               <img src={assets.mic_icon} alt="" onClick={handleMicClick} />
-              {input.length > 0 &&  (
+              {input.length > 0 && (
                 <img src={assets.send_icon} onClick={onSent} alt="" />
               )}
             </div>
           </div>
           <p className="bottom-info">
-            Gemini may display inaccurate info, including about people, so double-check its responses. Your privacy and Gemini Apps
+            Gemini may display inaccurate info, including about people, so
+            double-check its responses. Your privacy and Gemini Apps
           </p>
         </div>
       </div>
@@ -137,5 +169,3 @@ function Main() {
 }
 
 export default Main;
-
-
